@@ -5,5 +5,5 @@ public interface IToken {
 
     String getName();
 
-    String getLexeme();
+    char getLexeme();
 }

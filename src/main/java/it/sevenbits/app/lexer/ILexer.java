@@ -1,9 +1,12 @@
 package it.sevenbits.app.lexer;
 
 
+import it.sevenbits.app.formatter.FormatterException;
+import it.sevenbits.app.io.reader.IReader;
+
 public interface ILexer {
 
-    boolean hasMoreTokens();
+    public boolean hasMoreChars()throws FormatterException;
 
-    IToken readToken();
+    public IToken readToken() throws FormatterException;
 }
