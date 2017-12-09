@@ -1,9 +1,7 @@
 package it.sevenbits.app.formatter.implementation;
 
-import it.sevenbits.app.formatter.FormatterException;
+import it.sevenbits.app.formatter.exception.FormatterException;
 import it.sevenbits.app.formatter.IFormatter;
-import it.sevenbits.app.io.reader.IReader;
-import it.sevenbits.app.io.reader.ReaderException;
 import it.sevenbits.app.io.writer.IWriter;
 import it.sevenbits.app.io.writer.WriterException;
 import it.sevenbits.app.lexer.ILexer;
@@ -42,7 +40,7 @@ public class Formatter implements IFormatter {
                 if (previousToken.getName() == "skip") {
                     continue;
                 }
-                out.write(currentToken.getLexeme());
+                out.write(currentToken.getLexeme().toCharArray());
                 if (newline.indexOf(currentToken.getLexeme()) != -1) {
                     out.write(nextLine);
                 }

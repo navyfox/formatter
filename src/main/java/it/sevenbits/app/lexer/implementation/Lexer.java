@@ -1,7 +1,7 @@
 package it.sevenbits.app.lexer.implementation;
 
 
-import it.sevenbits.app.formatter.FormatterException;
+import it.sevenbits.app.formatter.exception.FormatterException;
 import it.sevenbits.app.io.reader.IReader;
 import it.sevenbits.app.io.reader.ReaderException;
 import it.sevenbits.app.lexer.ILexer;
@@ -11,9 +11,8 @@ public class Lexer implements ILexer {
 
     private final IReader reader;
 
-    public Lexer(IReader in){
-        reader = in;
-    }
+    public Lexer(final IReader in) {
+        reader = in; }
 
     @Override
     public boolean hasMoreChars() throws FormatterException {
@@ -24,8 +23,9 @@ public class Lexer implements ILexer {
         }
     }
 
+
     @Override
-    public IToken readToken() throws FormatterException{
+    public IToken readToken() throws FormatterException {
         try {
             char c = reader.getChar();
             IToken token = new Token(c);

@@ -10,7 +10,7 @@ import it.sevenbits.app.lexer.implementation.Lexer;
 /**
  * Class main.
  */
-public class Main {
+ public final class Main {
 
     /**
      * Main method.

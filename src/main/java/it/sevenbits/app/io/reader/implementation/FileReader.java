@@ -4,7 +4,6 @@ import it.sevenbits.app.io.closable.ClosableException;
 import it.sevenbits.app.io.closable.IClosable;
 import it.sevenbits.app.io.reader.IReader;
 import it.sevenbits.app.io.reader.ReaderException;
-
 import java.io.*;
 
 public class FileReader implements IReader, IClosable {

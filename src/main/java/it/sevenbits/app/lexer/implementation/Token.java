@@ -3,13 +3,12 @@ package it.sevenbits.app.lexer.implementation;
 import it.sevenbits.app.lexer.IToken;
 
 
-public class Token implements IToken{
-
+public class Token implements IToken {
     private String name;
     private char lexeme;
 
-    public Token(char ch){
-        switch (ch){
+    public Token(final char ch) {
+        switch (ch) {
             case '{':
                 name = "open_bkt";
                 lexeme = ch;

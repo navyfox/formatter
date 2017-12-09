@@ -1,6 +1,6 @@
-package it.sevenbits.app.formatter;
+package it.sevenbits.app.formatter.exception;
 
-public class FormatterException extends Exception{
+public class FormatterException extends Exception {
 
     public FormatterException(final Throwable cause) {
         super(cause);
