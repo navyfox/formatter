@@ -30,6 +30,31 @@ public final class CommandRepository implements ICommandRepository {
         commands.put(new Pair<>(new State("linestart"), "space"), (((token, context) -> {
         })));
         commands.put(new Pair<>(new State("linestart"), "char"), ((token, context) -> context.writeLexeme(token.getLexeme())));
+        commands.put(new Pair<>(new State("default"), "openbracket"), ((token, context) -> {
+            context.writeLexeme(token.getLexeme());
+            context.incrementIndent();
+            context.writeNewLine();
+            context.writeIndent();
+        }));
+        commands.put(new Pair<>(new State("default"), "closebracket"), ((token, context) -> {
+            context.writeLexeme(token.getLexeme());
+            context.decrementIndent();
+            context.writeNewLine();
+            context.writeIndent();
+        }));
+        commands.put(new Pair<>(new State("linestart"), "openbracket"), ((token, context) -> {
+            context.writeLexeme(token.getLexeme());
+            context.incrementIndent();
+            context.writeNewLine();
+            context.writeIndent();
+        }));
+        commands.put(new Pair<>(new State("linestart"), "closebracket"), ((token, context) -> {
+            context.writeLexeme(token.getLexeme());
+            context.decrementIndent();
+            context.writeNewLine();
+            context.writeIndent();
+        }));
+        commands.put(new Pair<>(new State("default"), "space"), ((token, context) -> context.writeLexeme(token.getLexeme())));
     }
 
     @Override

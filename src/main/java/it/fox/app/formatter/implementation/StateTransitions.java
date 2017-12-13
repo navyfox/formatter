@@ -24,6 +24,9 @@ public class StateTransitions implements IStateTransitions {
         transitions.put(new Pair<>(new State("linestart"), "newline"), new State("linestart"));
         transitions.put(new Pair<>(new State("linestart"), "space"), new State("linestart"));
         transitions.put(new Pair<>(new State("linestart"), "char"), new State("default"));
+        transitions.put(new Pair<>(new State("default"), "openbracket"), new State("default"));
+        transitions.put(new Pair<>(new State("default"), "closebracket"), new State("default"));
+        transitions.put(new Pair<>(new State("default"), "space"), new State("default"));
     }
 
     @Override

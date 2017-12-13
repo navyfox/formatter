@@ -26,8 +26,8 @@ public class AppTest {
 
     @Test
     public void simpleTest() throws FormatterException, ReaderException {
-        String inputString = "Hello";
-        String expectedResult = "Hello";
+        String inputString = "Hello word";
+        String expectedResult = "Hello word";
         IReader in = new StringReader(inputString);
         IWriter out = new StringWriter();
         ILexer lexer = new Lexer(in);
@@ -48,8 +48,16 @@ public class AppTest {
 
     @Test
     public void thirdSimpleTest() throws FormatterException, ReaderException {
-        String inputString = "{\n    test();\n    {\n    }\n}\n";
-        String expectedResult = "{\n    test();\n    {\n        }\n    }\n";
+        String inputString = "{\n" +
+                "    test();\n" +
+                "    {\n" +
+                "    }\n" +
+                "}\n";
+        String expectedResult = "{\n" +
+                "    test();\n" +
+                "        {\n" +
+                "        }\n" +
+                "    }\n";
         IReader in = new StringReader(inputString);
         IWriter out = new StringWriter();
         ILexer lexer = new Lexer(in);

@@ -43,6 +43,14 @@ public class CommandRepositoryLexer implements ICommandRepositoryLexer {
         commands.put(new Pair<>(new State("spacing"), null), (c, context) -> {
             context.appendPostpone(c);
         });
+        commands.put(new Pair<>(new State("default"), '{'), (c, context) -> {
+                    context.appendLexeme(c);
+                    context.setTokenName("openbracket");
+        });
+        commands.put(new Pair<>(new State("default"), '}'), (c, context) -> {
+                    context.appendLexeme(c);
+                    context.setTokenName("closebracket");
+        });
 
     }
 
