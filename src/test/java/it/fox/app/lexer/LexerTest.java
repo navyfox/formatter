@@ -57,6 +57,46 @@ public class LexerTest {
     }
 
     @Test
+    public void testTwoTokenize() {
+        IReader reader = new StringReader(
+                "{a\n" +
+                        "    b");
+
+        ILexer lexer = new Lexer(reader);
+
+        try {
+            assertTrue(lexer.hasNextToken());
+            IToken token = lexer.readToken();
+            assertEquals("openbracket", token.getName());
+            assertEquals("{", token.getLexeme());
+
+            assertTrue(lexer.hasNextToken());
+            token = lexer.readToken();
+            assertEquals("char", token.getName());
+            assertEquals("a", token.getLexeme());
+
+            assertTrue(lexer.hasNextToken());
+            token = lexer.readToken();
+            assertEquals("newline", token.getName());
+            assertEquals("\n", token.getLexeme());
+
+            assertTrue(lexer.hasNextToken());
+            token = lexer.readToken();
+            assertEquals("space", token.getName());
+            assertEquals("    ", token.getLexeme());
+
+            assertTrue(lexer.hasNextToken());
+            token = lexer.readToken();
+            assertEquals("char", token.getName());
+            assertEquals("b", token.getLexeme());
+
+            assertFalse(lexer.hasNextToken());
+        } catch (ReaderException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void testStateMachineLoop() {
         try {
             IReader reader = mock(IReader.class);

@@ -19,8 +19,8 @@ public class FormatterTest {
     @Test
     public void testSimpleFormat() throws FormatterException, ReaderException {
         IReader reader = new StringReader(
-                "a;\n" +
-                      "   b");
+                "{a\n" +
+                      "    b");
         IWriter writer = new StringWriter();
 
         ILexer lexer = new Lexer(reader);
@@ -28,7 +28,7 @@ public class FormatterTest {
         IFormatter formatter = new Formatter();
         formatter.format(lexer, writer);
 
-        assertEquals("a;\n" +
+        assertEquals("{\n    a\n" +
                               "b",
                               writer.toString());
 

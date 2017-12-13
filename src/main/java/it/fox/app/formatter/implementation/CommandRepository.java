@@ -25,6 +25,10 @@ public final class CommandRepository implements ICommandRepository {
             context.writeLexeme(token.getLexeme());
             context.writeNewLine();
         }));
+        commands.put(new Pair<>(new State("default"), "newline"), ((token, context) -> {
+            context.writeLexeme(token.getLexeme());
+            context.writeNewLine();
+        }));
         commands.put(new Pair<>(new State("linestart"), "newline"), ((token, context) -> {
         }));
         commands.put(new Pair<>(new State("linestart"), "space"), (((token, context) -> {

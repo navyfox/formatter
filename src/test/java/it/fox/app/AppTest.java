@@ -48,16 +48,8 @@ public class AppTest {
 
     @Test
     public void thirdSimpleTest() throws FormatterException, ReaderException {
-        String inputString = "{\n" +
-                "    test();\n" +
-                "    {\n" +
-                "    }\n" +
-                "}\n";
-        String expectedResult = "{\n" +
-                "    test();\n" +
-                "        {\n" +
-                "        }\n" +
-                "    }\n";
+        String inputString = "{{{}}}";
+        String expectedResult = "{\n    {\n        {\n        }        }";
         IReader in = new StringReader(inputString);
         IWriter out = new StringWriter();
         ILexer lexer = new Lexer(in);
