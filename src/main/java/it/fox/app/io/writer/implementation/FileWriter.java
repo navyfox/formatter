@@ -12,10 +12,21 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+/**
+ * Class for writing characters and strings to a file.
+ * Implements IWriter, IClosable.
+ */
+
 public class FileWriter implements IWriter, IClosable {
 
     private BufferedWriter bufferedWriter;
 
+    /**
+     * Opening the output stream
+     *
+     * @param path file directory path
+     * @throws WriterException if an error occurred in FileReader
+     */
     public FileWriter(final String path) throws WriterException {
         try {
             FileOutputStream outputStream =
@@ -39,7 +50,7 @@ public class FileWriter implements IWriter, IClosable {
     }
 
     @Override
-    public void writeString(final String s) throws WriterException {
+    public void write(final String s) throws WriterException {
         try {
             bufferedWriter.write(s);
         } catch (IOException e) {

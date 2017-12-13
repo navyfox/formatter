@@ -1,17 +1,17 @@
-package it.fox.app.io.closable;
+package it.fox.app.formatter;
 
 /**
  * Class wrapper for Exception
  */
 
-public class ClosableException extends Exception {
+public class FormatterException extends Exception {
 
     /**
      * basic constructor
      *
      * @param message exception text
      */
-    public ClosableException(final String message) {
+    public FormatterException(final String message) {
         super(message);
     }
 
@@ -20,7 +20,7 @@ public class ClosableException extends Exception {
      *
      * @param cause exception object
      */
-    public ClosableException(final Throwable cause) {
+    public FormatterException(final Throwable cause) {
         super(cause);
     }
 
@@ -30,8 +30,7 @@ public class ClosableException extends Exception {
      * @param message exception text
      * @param cause   exception object
      */
-    public ClosableException(final String message, final Throwable cause) {
+    public FormatterException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }
-

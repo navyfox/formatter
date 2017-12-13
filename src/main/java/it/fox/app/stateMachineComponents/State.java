@@ -1,10 +1,16 @@
-package it.fox.app.lexer.implementation;
+package it.fox.app.stateMachineComponents;
 
-public final class StateLexer {
+/**
+ * State of finite state machines
+ */
+public final class State {
 
     private final String name;
 
-    public StateLexer(final String name) {
+    /**
+     * @param name name state
+     */
+    public State(final String name) {
         this.name = name;
     }
 
@@ -13,7 +19,7 @@ public final class StateLexer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StateLexer that = (StateLexer) o;
+        State that = (State) o;
 
         return name.equals(that.name);
     }
@@ -25,7 +31,7 @@ public final class StateLexer {
 
     @Override
     public String toString() {
-        return "StateLexer{" +
+        return "State{" +
                 "name='" + name + '\'' +
                 '}';
     }

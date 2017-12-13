@@ -15,11 +15,22 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * Class for reading char from file.
+ * Implements IReader, IClosable.
+ */
+
 public class FileReader implements IReader, IClosable {
 
     private BufferedReader bufferedReader;
     private int currentSymbolId;
 
+    /**
+     * Opening the input stream
+     *
+     * @param path file directory path
+     * @throws ReaderException if an error occurred in FileReader
+     */
     public FileReader(final String path) throws ReaderException {
         try {
             InputStream fileStream =

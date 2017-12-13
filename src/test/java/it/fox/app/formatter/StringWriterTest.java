@@ -13,7 +13,7 @@ public class StringWriterTest {
     public void testSimpleWrite() {
         IWriter writer = new StringWriter();
         try {
-            writer.writeString("abc");
+            writer.write("abc");
         } catch (WriterException e) {
         }
         assertEquals("abc", writer.toString());

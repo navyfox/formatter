@@ -1,12 +1,10 @@
-package it.fox.app.formatter.lexer;
+package it.fox.app.lexer;
 
-import it.fox.app.formatter.ICommand;
 import it.fox.app.io.reader.ReaderException;
 import it.fox.app.io.reader.implementation.StringReader;
-import it.fox.app.lexer.*;
 import it.fox.app.io.reader.IReader;
 import it.fox.app.lexer.implementation.Lexer;
-import it.fox.app.lexer.implementation.StateLexer;
+import it.fox.app.stateMachineComponents.State;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -67,7 +65,7 @@ public class LexerTest {
 
             ICommandLexer command = mock(ICommandLexer.class);
             ICommandRepositoryLexer commands = mock(ICommandRepositoryLexer.class);
-            when(commands.getCommand(any(StateLexer.class), anyChar())).thenReturn(command);
+            when(commands.getCommand(any(State.class), anyChar())).thenReturn(command);
 
             IStateTransitionsLexer transitions = mock(IStateTransitionsLexer.class);
 
@@ -77,9 +75,9 @@ public class LexerTest {
 
             verify(reader, times(2)).hasNextChar();
             verify(reader).readChar();
-            verify(commands).getCommand(new StateLexer("default"), 'a');
+            verify(commands).getCommand(new State("default"), 'a');
             verify(command).execute(eq('a'), any(IContextLexer.class));
-            verify(transitions).getNextState(new StateLexer("default"), 'a');
+            verify(transitions).getNextState(new State("default"), 'a');
         } catch (ReaderException e) {
 
         }

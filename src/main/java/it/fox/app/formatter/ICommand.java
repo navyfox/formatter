@@ -1,10 +1,18 @@
 package it.fox.app.formatter;
 
-import it.fox.app.io.writer.IWriter;
+import it.fox.app.io.writer.WriterException;
 import it.fox.app.lexer.IToken;
-import it.fox.app.formatter.exception.CommandException;
+
+/**
+ * Interface for executing commands
+ */
 
 public interface ICommand {
 
-    void execute(IToken token, IWriter writer) throws CommandException;
+    /**
+     * @param token   the token that we read
+     * @param context formatter context
+     * @throws WriterException if an error occurred
+     */
+    void execute(IToken token, IContext context) throws WriterException;
 }

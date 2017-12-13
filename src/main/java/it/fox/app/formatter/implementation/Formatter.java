@@ -1,52 +1,41 @@
-//package it.sevenbits.app.formatter.implementation;
-//
-//import FormatterException;
-//import IFormatter;
-//import IWriter;
-//import WriterException;
-//import ILexer;
-//import IToken;
-//import Token;
-//
-//public class Formatter implements IFormatter {
-//
-//    private static final int INDENT = 4;
-//    private static final char INDENT_CHAR = ' ';
-//
-//    @Override
-//    public void format(final ILexer lexer , final IWriter out) throws FormatterException {
-//        try {
-//            final char nextLine = '\n';
-//            final String newline = "{};";
-//            char c = 0;
-//            IToken previousToken = new Token(c);
-//            int level = 0;
-//            while (lexer.hasNextToken()) {
-//                IToken currentToken = lexer.readToken();
-//                if (currentToken.getName() == "open_bkt") {
-//                    level++;
-//                }
-//                if (currentToken.getName() == "close_bkt") {
-//                    level--;
-//                }
-//
-//                if (newline.indexOf(previousToken.getLexeme()) != -1) {
-//                    for (int i = 0 ; i < level * INDENT; i++) {
-//                        out.write(INDENT_CHAR);
-//                    }
-//                }
-//
-//                previousToken = currentToken;
-//                if (previousToken.getName() == "skip") {
-//                    continue;
-//                }
-//                out.write(currentToken.getLexeme());
-//                if (newline.indexOf(currentToken.getLexeme()) != -1) {
-//                    out.write(nextLine);
-//                }
-//            }
-//        } catch (WriterException e) {
-//            throw new FormatterException("Writing error", e);
-//        }
-//    }
-//}
+package it.fox.app.formatter.implementation;
+
+import it.fox.app.formatter.ICommand;
+import it.fox.app.formatter.ICommandRepository;
+import it.fox.app.formatter.IContext;
+import it.fox.app.formatter.IFormatter;
+import it.fox.app.formatter.IStateTransitions;
+import it.fox.app.formatter.FormatterException;
+import it.fox.app.io.reader.ReaderException;
+import it.fox.app.io.writer.IWriter;
+import it.fox.app.io.writer.WriterException;
+import it.fox.app.lexer.ILexer;
+import it.fox.app.lexer.IToken;
+import it.fox.app.stateMachineComponents.State;
+
+/**
+ * Class with a single method for formatting text
+ */
+public class Formatter implements IFormatter {
+
+    private ICommandRepository commands = new CommandRepository();
+    private IStateTransitions transitions = new StateTransitions();
+
+    @Override
+    public void format(final ILexer lexer, final IWriter writer) throws FormatterException {
+        try {
+            IContext context = new Context(writer);
+            State state = new State("default");
+            while (lexer.hasNextToken() && state != null) {
+                IToken token = lexer.readToken();
+                ICommand command = commands.getCommand(state, token);
+                command.execute(token, context);
+                state = transitions.getNextSate(state, token);
+            }
+        } catch (ReaderException e) {
+            throw new FormatterException("Reading error", e);
+        } catch (WriterException e) {
+            throw new FormatterException("Writing error", e);
+        }
+    }
+}

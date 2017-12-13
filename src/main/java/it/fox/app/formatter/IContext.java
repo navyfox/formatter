@@ -1,23 +1,52 @@
 package it.fox.app.formatter;
 
+import it.fox.app.io.writer.WriterException;
 
-import it.fox.app.io.writer.IWriter;
-import it.fox.app.lexer.IToken;
-import it.fox.app.formatter.exception.ContextException;
-
+/**
+ * The context for formatter
+ */
 public interface IContext {
 
+    /**
+     * @serialField INDENT style indent for java
+     */
     int INDENT = 4;
+    /**
+     * @serialField NEXT_LINE symbol next line
+     */
     char NEXT_LINE = '\n';
+    /**
+     * @serialField INDENT_CHAR symbol indent
+     */
     char INDENT_CHAR = ' ';
 
-    void writeLexeme(IToken token, IWriter writer) throws ContextException;
+    /**
+     * write new line
+     *
+     * @throws WriterException if an error occurred
+     */
+    void writeNewLine() throws WriterException;
 
-    void writeNewLine(IWriter writer) throws ContextException;
+    /**
+     * @param lexeme token record
+     * @throws WriterException if an error occurred
+     */
+    void writeLexeme(String lexeme) throws WriterException;
 
-    void writeIndent(IWriter writer) throws ContextException;
+    /**
+     * record indent
+     *
+     * @throws WriterException if an error occurred
+     */
+    void writeIndent() throws WriterException;
 
+    /**
+     * widening of gaps
+     */
     void incrementIndent();
 
+    /**
+     * reduction of gaps
+     */
     void decrementIndent();
 }
