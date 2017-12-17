@@ -1,0 +1,28 @@
+- state: 'default'
+  actions:
+    - input: null
+      command: 'Char'
+      state: 'default'
+    - input: ';'
+      command: 'Semicolon'
+      state: 'default'
+    - input: "\n"
+      command: 'Newline'
+      state: 'default'
+    - input: '{'
+      command: 'Openbracket'
+      state: 'default'
+    - input: '}'
+      command: 'Closebracket'
+      state: 'default'
+    - input: ' '
+      command: 'Space'
+      state: 'spacing'
+- state: 'spacing'
+  actions:
+    - input: ' '
+      command: 'Spaces'
+      state: 'spacing'
+    - input: null
+      command: 'Endspace'
+      state: 'default'

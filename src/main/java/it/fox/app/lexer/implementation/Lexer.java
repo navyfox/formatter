@@ -3,13 +3,14 @@ package it.fox.app.lexer.implementation;
 import it.fox.app.io.reader.IReader;
 import it.fox.app.io.reader.ReaderException;
 import it.fox.app.io.reader.implementation.StringReader;
-import it.fox.app.lexer.ICommandLexer;
+import it.fox.app.lexerCommand.ICommandLexer;
 import it.fox.app.lexer.ICommandRepositoryLexer;
 import it.fox.app.lexer.IContextLexer;
 import it.fox.app.lexer.ILexer;
 import it.fox.app.lexer.IStateTransitionsLexer;
 import it.fox.app.lexer.IToken;
 import it.fox.app.stateMachineComponents.State;
+import it.fox.app.yaml.*;
 
 /**
  * The class of lexical analysis
@@ -17,12 +18,14 @@ import it.fox.app.stateMachineComponents.State;
 public class Lexer implements ILexer, IContextLexer {
 
     private final IReader reader;
+    private ResourceLexerYAML resourceLexerYAML;
 
     private String tokenName;
     private StringBuilder tokenLexeme;
     private ICommandRepositoryLexer commands;
     private IStateTransitionsLexer transitions;
     private StringBuilder postponeBuffer = new StringBuilder();
+
 
     /**
      * The basic constructor that calls the another constructor
@@ -31,20 +34,19 @@ public class Lexer implements ILexer, IContextLexer {
      * @param reader class that implements iReader interface
      */
     public Lexer(final IReader reader) {
-        this(reader, new CommandRepositoryLexer(), new StateTransitionsLexer());
-    }
-
-    /**
-     * The constructor initializes instance of a class
-     *
-     * @param reader      class that implements iReader interface
-     * @param commands    class that implements ICommandRepository interface
-     * @param transitions class that implements IStateTransitions interface
-     */
-    public Lexer(final IReader reader, final ICommandRepositoryLexer commands, final IStateTransitionsLexer transitions) {
+//        this(reader, new CommandRepositoryLexer(), new StateTransitionsLexer());
         this.reader = reader;
-        this.commands = commands;
-        this.transitions = transitions;
+        try {
+            resourceLexerYAML = new ResourceLexerYAML();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        this.commands = ResourceLexerYAML.commands;
+        this.transitions = new StateTransitionsLexer();
     }
 
     @Override

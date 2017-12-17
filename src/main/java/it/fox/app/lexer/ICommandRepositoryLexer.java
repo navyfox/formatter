@@ -1,5 +1,6 @@
 package it.fox.app.lexer;
 
+import it.fox.app.lexerCommand.ICommandLexer;
 import it.fox.app.stateMachineComponents.State;
 
 /**

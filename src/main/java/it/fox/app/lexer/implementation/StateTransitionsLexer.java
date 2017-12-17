@@ -17,7 +17,8 @@ public class StateTransitionsLexer implements IStateTransitionsLexer {
     /**
      * The map state transitions for lexer
      */
-    StateTransitionsLexer() {
+    public StateTransitionsLexer() {
+//        states = new HashMap<>();
         states.put(new Pair<>(new State("default"), ' '), new State("spacing"));
         states.put(new Pair<>(new State("spacing"), ' '), new State("spacing"));
     }
@@ -29,5 +30,15 @@ public class StateTransitionsLexer implements IStateTransitionsLexer {
             nextState = states.get(new Pair<>(state, (Character) null));
         }
         return nextState;
+    }
+
+    /**
+     *
+     * @param state
+     * @param input
+     * @param newState
+     */
+    public void put(final State state, final Character input, final State newState) {
+        states.put(new Pair<>(state, input), newState);
     }
 }

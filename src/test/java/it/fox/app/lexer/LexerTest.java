@@ -3,7 +3,10 @@ package it.fox.app.lexer;
 import it.fox.app.io.reader.ReaderException;
 import it.fox.app.io.reader.implementation.StringReader;
 import it.fox.app.io.reader.IReader;
+import it.fox.app.lexer.*;
 import it.fox.app.lexer.implementation.Lexer;
+import it.fox.app.lexerCommand.ICommandLexer;
+import it.fox.app.yaml.*;
 import it.fox.app.stateMachineComponents.State;
 import org.junit.Test;
 
@@ -93,33 +96,6 @@ public class LexerTest {
             assertFalse(lexer.hasNextToken());
         } catch (ReaderException e) {
             e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void testStateMachineLoop() {
-        try {
-            IReader reader = mock(IReader.class);
-            when(reader.hasNextChar()).thenReturn(true, false);
-            when(reader.readChar()).thenReturn('a');
-
-            ICommandLexer command = mock(ICommandLexer.class);
-            ICommandRepositoryLexer commands = mock(ICommandRepositoryLexer.class);
-            when(commands.getCommand(any(State.class), anyChar())).thenReturn(command);
-
-            IStateTransitionsLexer transitions = mock(IStateTransitionsLexer.class);
-
-            ILexer lexer = new Lexer(reader, commands, transitions);
-            lexer.readToken();
-
-
-            verify(reader, times(2)).hasNextChar();
-            verify(reader).readChar();
-            verify(commands).getCommand(new State("default"), 'a');
-            verify(command).execute(eq('a'), any(IContextLexer.class));
-            verify(transitions).getNextState(new State("default"), 'a');
-        } catch (ReaderException e) {
-
         }
     }
 }

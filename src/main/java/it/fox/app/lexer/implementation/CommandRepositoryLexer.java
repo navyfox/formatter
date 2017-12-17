@@ -1,7 +1,7 @@
 package it.fox.app.lexer.implementation;
 
 import com.sun.tools.javac.util.Pair;
-import it.fox.app.lexer.ICommandLexer;
+import it.fox.app.lexerCommand.ICommandLexer;
 import it.fox.app.lexer.ICommandRepositoryLexer;
 import it.fox.app.stateMachineComponents.State;
 
@@ -13,44 +13,46 @@ import java.util.Map;
  */
 public class CommandRepositoryLexer implements ICommandRepositoryLexer {
 
-    private final Map<Pair<State, Character>, ICommandLexer> commands = new HashMap<>();
+    private final Map<Pair<State, Character>, ICommandLexer> commands;
 
     /**
      * The command map for lexer
      */
-    CommandRepositoryLexer() {
+    public CommandRepositoryLexer() {
 
-        commands.put(new Pair<>(new State("default"), null), (c, context) -> {
-            context.appendLexeme(c);
-            context.setTokenName("char");
-        });
-        commands.put(new Pair<>(new State("default"), ';'), (c, context) -> {
-            context.appendLexeme(c);
-            context.setTokenName("semicolon");
-        });
-        commands.put(new Pair<>(new State("default"), '\n'), (c, context) -> {
-            context.appendLexeme(c);
-            context.setTokenName("newline");
-        });
-        commands.put(new Pair<>(new State("default"), ' '), (c, context) -> {
-            context.appendLexeme(c);
-            context.setTokenName("space");
-        });
-        commands.put(new Pair<>(new State("spacing"), ' '), (c, context) -> {
-            context.appendLexeme(c);
-            context.setTokenName("space");
-        });
-        commands.put(new Pair<>(new State("spacing"), null), (c, context) -> {
-            context.appendPostpone(c);
-        });
-        commands.put(new Pair<>(new State("default"), '{'), (c, context) -> {
-                    context.appendLexeme(c);
-                    context.setTokenName("openbracket");
-        });
-        commands.put(new Pair<>(new State("default"), '}'), (c, context) -> {
-                    context.appendLexeme(c);
-                    context.setTokenName("closebracket");
-        });
+        commands = new HashMap<>();
+
+//        commands.put(new Pair<>(new State("default"), null), (c, context) -> {
+//            context.appendLexeme(c);
+//            context.setTokenName("char");
+//        });
+//        commands.put(new Pair<>(new State("default"), ';'), (c, context) -> {
+//            context.appendLexeme(c);
+//            context.setTokenName("semicolon");
+//        });
+//        commands.put(new Pair<>(new State("default"), '\n'), (c, context) -> {
+//            context.appendLexeme(c);
+//            context.setTokenName("newline");
+//        });
+//        commands.put(new Pair<>(new State("default"), ' '), (c, context) -> {
+//            context.appendLexeme(c);
+//            context.setTokenName("space");
+//        });
+//        commands.put(new Pair<>(new State("spacing"), ' '), (c, context) -> {
+//            context.appendLexeme(c);
+//            context.setTokenName("space");
+//        });
+//        commands.put(new Pair<>(new State("spacing"), null), (c, context) -> {
+//            context.appendPostpone(c);
+//        });
+//        commands.put(new Pair<>(new State("default"), '{'), (c, context) -> {
+//                    context.appendLexeme(c);
+//                    context.setTokenName("openbracket");
+//        });
+//        commands.put(new Pair<>(new State("default"), '}'), (c, context) -> {
+//                    context.appendLexeme(c);
+//                    context.setTokenName("closebracket");
+//        });
 
     }
 
@@ -61,5 +63,15 @@ public class CommandRepositoryLexer implements ICommandRepositoryLexer {
             command = commands.get(new Pair<>(state, (Character) null));
         }
         return command;
+    }
+
+    /**
+     *
+     * @param state
+     * @param input
+     * @param command
+     */
+    public void put(final State state, final Character input, final ICommandLexer command) {
+        commands.put(new Pair<>(state, input), command);
     }
 }

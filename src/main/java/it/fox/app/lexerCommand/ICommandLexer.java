@@ -1,4 +1,6 @@
-package it.fox.app.lexer;
+package it.fox.app.lexerCommand;
+
+import it.fox.app.lexer.IContextLexer;
 
 /**
  * The interface of the commands that we perform for the lexer
