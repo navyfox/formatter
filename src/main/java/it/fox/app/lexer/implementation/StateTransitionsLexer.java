@@ -1,7 +1,7 @@
 package it.fox.app.lexer.implementation;
 
-import com.sun.tools.javac.util.Pair;
 import it.fox.app.lexer.IStateTransitionsLexer;
+import it.fox.app.stateMachineComponents.Pair;
 import it.fox.app.stateMachineComponents.State;
 
 import java.util.HashMap;

@@ -1,8 +1,8 @@
 package it.fox.app.formatter.implementation;
 
-import com.sun.tools.javac.util.Pair;
 import it.fox.app.formatter.IStateTransitions;
 import it.fox.app.lexer.IToken;
+import it.fox.app.stateMachineComponents.Pair;
 import it.fox.app.stateMachineComponents.State;
 
 import java.util.HashMap;

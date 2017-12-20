@@ -1,9 +1,9 @@
 package it.fox.app.formatter.implementation;
 
-import com.sun.tools.javac.util.Pair;
 import it.fox.app.formatter.ICommand;
 import it.fox.app.formatter.ICommandRepository;
 import it.fox.app.lexer.IToken;
+import it.fox.app.stateMachineComponents.Pair;
 import it.fox.app.stateMachineComponents.State;
 
 import java.util.HashMap;

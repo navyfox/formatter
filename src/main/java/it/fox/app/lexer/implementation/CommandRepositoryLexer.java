@@ -1,8 +1,8 @@
 package it.fox.app.lexer.implementation;
 
-import com.sun.tools.javac.util.Pair;
 import it.fox.app.lexerCommand.ICommandLexer;
 import it.fox.app.lexer.ICommandRepositoryLexer;
+import it.fox.app.stateMachineComponents.Pair;
 import it.fox.app.stateMachineComponents.State;
 
 import java.util.HashMap;
